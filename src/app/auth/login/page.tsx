@@ -49,7 +49,7 @@ const LoginPage: React.FC = () => {
           mt: 3
         }}
       >
-        Don't have an account?{' '}
+        Don&apos;t have an account?{' '}
         <Button
           variant="text"
           sx={{

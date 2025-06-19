@@ -11,7 +11,7 @@ const store = makeStore()
 const ClientProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} defaultMode='light'>
         {children}
       </ThemeProvider>
     </Provider>
