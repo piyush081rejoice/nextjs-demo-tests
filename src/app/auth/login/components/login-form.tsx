@@ -6,8 +6,8 @@ import {
 } from '@mui/icons-material';
 import {
   Box,
-  Button,
   IconButton,
+  Button as MUIButton,
   InputAdornment,
   Stack,
   TextField
@@ -20,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { AppDispatch, RootState } from '@/common/lib/redux/store';
 import { login } from '@/common/lib/redux/reducers/auth-slice';
+import Button from '@/common/theme/button';
 
 const loginSchema = z.object({
   username: z.string().min(6, { message: 'Username must be at least 6 characters' }),
@@ -146,7 +147,7 @@ const LoginForm = () => {
       </Stack>
 
       <Box textAlign="right" mb={3}>
-        <Button
+        <MUIButton
           variant="text"
           sx={{
             textTransform: 'none',
@@ -162,7 +163,7 @@ const LoginForm = () => {
           }}
         >
           Forgot password?
-        </Button>
+        </MUIButton>
       </Box>
 
       {error && (
@@ -175,28 +176,6 @@ const LoginForm = () => {
         fullWidth
         variant="contained"
         disabled={loading}
-        sx={{
-          py: 2,
-          borderRadius: 4,
-          textTransform: 'none',
-          fontSize: '0.95rem',
-          fontWeight: 500,
-          backgroundColor: '#0f172a',
-          boxShadow: 'none',
-          '&:hover': {
-            backgroundColor: '#1e293b',
-            boxShadow: 'none',
-            transform: 'translateY(-1px)'
-          },
-          '&:active': {
-            transform: 'translateY(0)'
-          },
-          '&:disabled': {
-            backgroundColor: '#0f172a',
-            opacity: 0.8,
-            color: 'white'
-          }
-        }}
       >
         {loading ? 'Signing in...' : 'Sign in'}
       </Button>

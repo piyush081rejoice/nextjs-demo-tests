@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { setCookie, deleteCookie } from 'cookies-next';
 
 import { API_ROUTES } from '@/common/utils/constants/apis';
+import { STORAGE_KEYS } from '@/common/utils/constants/routes';
 
 type AuthState = {
   user: null | { username: string };
@@ -31,6 +33,12 @@ export const login = createAsyncThunk<
         'Content-Type': 'application/json',
       },
     });
+    if (res.data.accessToken) {
+      setCookie(STORAGE_KEYS.COOKIE_ACCESS_TOKEN, res.data.accessToken);
+    }
+    if (res.data.refreshToken) {
+      setCookie(STORAGE_KEYS.COOKIE_REFRESH_TOKEN, res.data.refreshToken);
+    }
     return res.data;
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
@@ -43,6 +51,8 @@ export const login = createAsyncThunk<
 });
 
 export const logout = createAsyncThunk('auth/logout', async () => {
+  deleteCookie(STORAGE_KEYS.COOKIE_ACCESS_TOKEN);
+  deleteCookie(STORAGE_KEYS.COOKIE_REFRESH_TOKEN);
   return true;
 });
 
