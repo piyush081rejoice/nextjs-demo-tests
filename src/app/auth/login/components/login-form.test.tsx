@@ -9,6 +9,9 @@ import LoginForm from './login-form';
 import { login } from '@/common/lib/redux/reducers/auth-slice';
 import '@testing-library/jest-dom';
 
+const MOCK_USERNAME = 'michaelw';
+const MOCK_PASSWORD = 'michaelwpass';
+
 jest.mock('@/common/lib/redux/reducers/auth-slice', () => ({
   login: jest.fn(),
 }));
@@ -85,8 +88,8 @@ describe('LoginForm', () => {
     const usernameInput = screen.getByPlaceholderText('Username') as HTMLInputElement;
     const passwordInput = screen.getByPlaceholderText('Password') as HTMLInputElement;
 
-    expect(usernameInput.value).toBe('michaelw');
-    expect(passwordInput.value).toBe('michaelwpass');
+    expect(usernameInput.value).toBe(MOCK_USERNAME);
+    expect(passwordInput.value).toBe(MOCK_PASSWORD);
   });
 
   it('toggles password visibility when eye icon is clicked', async () => {
