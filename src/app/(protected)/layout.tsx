@@ -21,14 +21,17 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
 
   const [open, setOpen] = useState(false)
 
+  // Handles opening of the side drawer
   const handleDrawerOpen = () => {
     setOpen(true)
   }
 
+  // Handles closing of the side drawer
   const handleDrawerClose = () => {
     setOpen(false)
   }
 
+  // Handles logout and redirects to login page after successful logout
   const handleLogout = () => {
     dispatch(logout())
     router.push(ROUTES.AUTH_LOGIN)

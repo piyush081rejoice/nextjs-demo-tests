@@ -1,9 +1,9 @@
-"use client"
 import {
   ButtonProps,
   Button as MUIButton
 } from '@mui/material';
 
+// Theme styled MUI Button component
 export default function Button({ sx, ...props }: ButtonProps) {
   return <MUIButton
     sx={{

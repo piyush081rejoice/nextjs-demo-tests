@@ -22,6 +22,7 @@ import { AppDispatch, RootState } from '@/common/lib/redux/store';
 import { login } from '@/common/lib/redux/reducers/auth-slice';
 import Button from '@/common/theme/button';
 
+// Login Form validation schema using Zod
 const loginSchema = z.object({
   username: z.string().min(6, { message: 'Username must be at least 6 characters' }),
   password: z.string().min(6, { message: 'Password must be at least 8 characters' }),
@@ -29,6 +30,12 @@ const loginSchema = z.object({
 
 type LoginFormInputs = z.infer<typeof loginSchema>;
 
+/**
+ * LoginForm component
+ * Handles user authentication with username and password
+ * Uses React Hook Form with Zod validation
+ * Integrates with Redux for state management
+ */
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch<AppDispatch>();

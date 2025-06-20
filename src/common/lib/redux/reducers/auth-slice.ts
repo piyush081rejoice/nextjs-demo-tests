@@ -17,6 +17,7 @@ const initialState: AuthState = {
   error: null,
 };
 
+// Handles user login with credentials
 export const login = createAsyncThunk<
   any,
   { username: string; password: string },
@@ -50,12 +51,14 @@ export const login = createAsyncThunk<
   }
 });
 
+// Handles user logout and clears auth cookies
 export const logout = createAsyncThunk('auth/logout', async () => {
   deleteCookie(STORAGE_KEYS.COOKIE_ACCESS_TOKEN);
   deleteCookie(STORAGE_KEYS.COOKIE_REFRESH_TOKEN);
   return true;
 });
 
+// Auth slice for managing authentication state
 const authSlice = createSlice({
   name: 'auth',
   initialState,
