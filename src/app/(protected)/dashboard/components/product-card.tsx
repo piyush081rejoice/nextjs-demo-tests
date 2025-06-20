@@ -1,4 +1,5 @@
 import { Card, CardActionArea, CardContent, CardMedia, Chip, Rating, Stack, Typography } from '@mui/material';
+import Image from 'next/image';
 
 type ProductDimensions = {
   width: number;
@@ -21,7 +22,7 @@ type ProductMeta = {
   qrCode: string;
 }
 
-export type Product = {
+export type ProductType = {
   id: number;
   title: string;
   description: string;
@@ -46,11 +47,8 @@ export type Product = {
   images: string[];
 }
 
-type ProductCardProps = {
-  product: Product;
-}
-
-const ProductCard = ({ product }: ProductCardProps) => (
+// Displays a single product card with image, details, and interactive elements
+const ProductCard = ({ product }: { product: ProductType }) => (
   <Card
     sx={{
       maxWidth: 345,
@@ -58,7 +56,7 @@ const ProductCard = ({ product }: ProductCardProps) => (
       display: 'flex',
       flexDirection: 'column',
       borderRadius: 3,
-      boxShadow: 4, // MUI shadow level 4
+      boxShadow: 4,
       transition: 'box-shadow 0.2s, transform 0.15s',
       '&:hover': {
         boxShadow: 8,
@@ -69,7 +67,7 @@ const ProductCard = ({ product }: ProductCardProps) => (
   >
     <CardActionArea sx={{ borderRadius: 3, overflow: 'hidden' }}>
       <CardMedia
-        component="img"
+        component={Image}
         height="180"
         image={product.thumbnail || product.images?.[0] || '/placeholder.png'}
         alt={product.title}
@@ -85,13 +83,14 @@ const ProductCard = ({ product }: ProductCardProps) => (
         <Typography variant="body2" color="text.secondary" mb={1} fontWeight={500}>
           {product.brand}
         </Typography>
+        {/* Price display with discount calculation */}
         <Stack direction="row" spacing={1} alignItems="center" mb={1}>
           <Typography variant="body1" color="primary" fontWeight={700}>
             ${product.price}
           </Typography>
           {product.discountPercentage > 0 && (
             <Typography variant="caption" color="text.secondary" sx={{ textDecoration: 'line-through', ml: 0.5 }}>
-              ${ (product.price / (1 - product.discountPercentage / 100)).toFixed(2) }
+              ${(product.price / (1 - product.discountPercentage / 100)).toFixed(2)}
             </Typography>
           )}
           {product.discountPercentage > 0 && (
@@ -114,6 +113,7 @@ const ProductCard = ({ product }: ProductCardProps) => (
         >
           {product.availabilityStatus}
         </Typography>
+        {/* Display 3 tags at max*/}
         <Stack direction="row" spacing={1} mt={1}>
           {product.tags?.slice(0, 3).map((tag: string) => (
             <Chip key={tag} label={tag} size="small" variant="outlined" sx={{ fontSize: '0.8em' }} />

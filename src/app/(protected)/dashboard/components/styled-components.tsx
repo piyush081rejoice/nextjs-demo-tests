@@ -7,6 +7,7 @@ type AppBarProps = MuiAppBarProps & {
   open?: boolean
 }
 
+// Styled drawer header component
 export const DrawerHeader = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -15,6 +16,7 @@ export const DrawerHeader = styled(Box)(({ theme }) => ({
   justifyContent: 'flex-end',
 }))
 
+// Styled main container of the paige
 export const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean
 }>(({ theme }) => ({
@@ -39,6 +41,7 @@ export const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open
   ],
 }))
 
+// Styled App Bar Header
 export const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<AppBarProps>(({ theme }) => ({

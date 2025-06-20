@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from '@/common/lib/redux/reducers/auth-slice';
 
+// Creates and configures the Redux store with the root reducer and middleware
 export const makeStore = () => {
   return configureStore({
     reducer: {
